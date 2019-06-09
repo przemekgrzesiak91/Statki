@@ -4,14 +4,14 @@ import numpy as np
 
 plansza = np.full((10,10),".")
 
-def rysuj_plansze():
+def rysuj_plansze(plik="ustawienia.txt"):
 
     if sys.stdin.isatty():
-        with open("ustawienia.txt",'r') as stream:
+        with open(plik,'r') as stream:
             moje_statki = yaml.safe_load(stream)
     else:
         moje_statki=yaml.safe_load(sys.stdin.read())
-        open('ustawienia.txt', 'w').write(yaml.dump(moje_statki))
+        open(plik, 'w').write(yaml.dump(moje_statki))
 
     for i in range(1,11):
         for j in range(0,len(moje_statki[i][2])):
@@ -29,4 +29,5 @@ def rysuj_plansze():
     print ("   ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯")
     return
 
-rysuj_plansze()
+if __name__ == "__main__":
+    rysuj_plansze()
